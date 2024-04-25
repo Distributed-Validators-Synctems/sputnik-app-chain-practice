@@ -105,7 +105,7 @@ all: install lint run-tests test-e2e vulncheck
 
 BUILD_TARGETS := build install
 
-build: BUILD_ARGS=-o $(BUILDDIR)/sputnikd
+build: BUILD_ARGS=-o $(BUILDDIR)
 
 $(BUILD_TARGETS): check_version go.sum $(BUILDDIR)/
 	go $@ -mod=readonly $(BUILD_FLAGS) $(BUILD_ARGS) ./...
@@ -118,7 +118,7 @@ vulncheck: $(BUILDDIR)/
 	$(BUILDDIR)/govulncheck ./...
 
 build-linux: go.sum
-	LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 $(MAKE) build: BUILD_ARGS=-o $(BUILDDIR)/sputnik
+	LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 $(MAKE) build
 
 go.sum: go.mod
 	@echo "--> Ensure dependencies have not been modified"
