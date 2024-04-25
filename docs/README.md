@@ -1,40 +1,70 @@
-<!--
-parent:
-  order: false
-layout: home
--->
+# Validators School Sputnik Testnet
 
-# Cosmos Hub Documentation
 
-Welcome to the documentation of the **Cosmos Hub application: `gaia`**.
+## Sputnik app-chain binaries installation (sputnikd)
 
-## What is Gaia?
+Sputnik app testnet binary repo
+https://github.com/Distributed-Validators-Synctems/sputnik-app-chain-practice
 
-- [Intro to the `gaia` software](./getting-started/what-is-gaia.md)
-- [Interacting with the `gaiad` binary](./hub-tutorials/gaiad.md)
+```
+name: SputnikApp
+server_name: sputnikd
+version: v15.2.0
+commit: 7281c9b9dc4e3087ee87f5b24e416802b52e8661
+build_tags: netgo ledger
+```
 
-## Join the Cosmos Hub Mainnet
+## GenTx generation
 
-- [Install the `gaia` application](./getting-started/installation.md)
-- [Set up a full node and join the mainnet](./hub-tutorials/join-mainnet.md)
-- [Upgrade to a validator node](./validators/validator-setup.md)
+### Init
+```bash:
+sputnikd init "<moniker-name>" --chain-id <current course chain id>
+```
 
-## Join the Cosmos Hub Public Testnet
+### Generate keys
 
-- [Join the testnet](./hub-tutorials/join-testnet.md)
+```bash:
+# To create new keypair - make sure you save the mnemonics!
+sputnikd keys add <key-name> 
+```
 
-## Setup Your Own `gaia` Testnet
+or
+```
+# Restore existing odin wallet with mnemonic seed phrase. 
+# You will be prompted to enter mnemonic seed. 
+sputnikd keys add <key-name> --recover
+```
+or
+```
+# Add keys using ledger
+sputnikd keys show <key-name> --ledger
+```
 
-- [Setup your own `gaia` testnet](https://github.com/cosmos/testnets/tree/master/local/previous-local-testnets/v7-theta)
+Check your key:
+```
+# Query the keystore for your public address 
+sputnikd keys show <key-name> -a
+```
 
-## Additional Resources
+### Create account to genesis
 
-- [Validator Resources](./validators/README.md): Contains documentation for `gaia` validators.
-- [Delegator Resources](./delegators/README.md): Contains documentation for delegators.
-- [Other Resources](./resources/README.md): Contains documentation on `gaiad`, genesis file, service providers, ledger wallets, ...
-- [Cosmos Hub Archives](./resources/archives.md): State archives of past iteration of the Cosmos Hub.
+```
+sputnikd add-genesis-account <key-name> 1000000000uatom --keyring-backend <os | file>
+```
 
-# Contribute
+### Create GenTX
 
-See [this file](./DOCS_README.md) for details of the build process and
-considerations when making changes.
+```
+# Create the gentx.
+# Note, your gentx will be rejected if you use any amount greater than 1000000000uatom.
+sputnikd gentx <key-name> 1000000000uatom --output-document=gentx.json \
+  --chain-id=<current course chain id> \
+  --moniker="<moniker-name>" \
+  --website=<your-node-website> \
+  --details=<your-node-details> \
+  --commission-rate="0.10" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation="1" \
+  --keyring-backend <os | file>
+```
