@@ -1,6 +1,6 @@
-# Cosmos Hub (Gaia)
+# Sputnik Network (Sputnik)
 
-![Banner!](https://miro.medium.com/max/2000/1*DHtmSfS_Efvuq8n2LAnhkA.png)
+![BACKGROUND](https://github.com/Distributed-Validators-Synctems/sputnik-app-chain-practice/assets/38581319/51b233bb-03a1-42a8-9d58-7222e01d6b52)
 
 [![Project Status: Active -- The project has reached a stable, usable state and is being actively
 developed.](https://img.shields.io/badge/repo%20status-Active-green.svg)](https://www.repostatus.org/#active)
