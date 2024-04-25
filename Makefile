@@ -64,8 +64,8 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=gaia \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=gaiad \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=sputnik \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=sputnik \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
@@ -97,7 +97,7 @@ include contrib/devtools/Makefile
 
 check_version:
 ifneq ($(GO_SYSTEM_VERSION), $(REQUIRE_GO_VERSION))
-	@echo "ERROR: Go version 1.21 is required for $(VERSION) of Gaia."
+	@echo "ERROR: Go version 1.21 is required for $(VERSION) of Sputnik App."
 	exit 1
 endif
 
